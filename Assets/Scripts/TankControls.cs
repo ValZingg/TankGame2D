@@ -23,6 +23,7 @@ public class TankControls : MonoBehaviour
     public float canonrotatespeed = 2.0f;
 
     [Header("Base Tank Values")]
+    public string TankToLoad;
     public Tank TankScript;
     public GameObject tankbody;
     public float tankspeed = 5.0f;
@@ -39,11 +40,14 @@ public class TankControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TankScript = GetComponent<Tank>();
-        canonrotatespeed = TankScript.BasicCanonTurnRate;
-        tankspeed = TankScript.BaseSpeed;
-        tankrotatespeed = TankScript.BaseTurnRate;
-        acceleration = TankScript.BaseAcceleration;
+        if (TankToLoad == "LightTank") TankScript = new LightTank();
+        else if (TankToLoad == "MediumTank") TankScript = new MediumTank();
+        else if (TankToLoad == "HeavyTank") TankScript = new HeavyTank();
+
+        canonrotatespeed = TankScript.CanonTurnRate;
+        tankspeed = TankScript.Speed;
+        tankrotatespeed = TankScript.TurnRate;
+        acceleration = TankScript.Acceleration;
 
 
         Linerenderer_Aim = GetComponent<LineRenderer>();
@@ -62,14 +66,11 @@ public class TankControls : MonoBehaviour
         }
 
         //ROTATION DU CANON
-        if(!TankScript.RestrictTurretTurn)
-        {
-            var pos = Camera.main.WorldToScreenPoint(Canon.transform.position);
-            var dir = Input.mousePosition - pos;
-            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
-            Canon.transform.rotation = Quaternion.Slerp(Canon.transform.rotation, rotation, canonrotatespeed * Time.deltaTime * 2);
-        }
+        var pos = Camera.main.WorldToScreenPoint(Canon.transform.position);
+        var dir = Input.mousePosition - pos;
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
+        Canon.transform.rotation = Quaternion.Slerp(Canon.transform.rotation, rotation, canonrotatespeed * Time.deltaTime * 2);
 
         //LIGNE DE VISÈE
         Linerenderer_Aim.SetPosition(0, Canon.transform.position);

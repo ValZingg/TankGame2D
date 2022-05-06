@@ -1,0 +1,5 @@
+name = TestHull
+Requirement = Light;Medium;Heavy
+Condition = 100
+FlamRes = 100
+Armor = 5

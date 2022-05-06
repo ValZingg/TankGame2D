@@ -8,18 +8,27 @@ using UnityEngine;
      
      */
 
-public class Tank : MonoBehaviour
+
+public class Tank
 {
     //===================
     [Header("Attributes")]
-    public float BaseAcceleration = 1.0f;
-    public float BaseSpeed = 5.0f;
-    public float BaseTurnRate = 1.0f;
-    public float BasicCanonTurnRate = 1.0f; //Vitesse de rotation du canon
+    public string TankName;
+
+    public float Health;
+    public float MaxHealth;
+
+    public float DamagePerShell;
+    public float FiringRate;
+
+    public float Acceleration = 1.0f;
+    public float Speed = 5.0f;
+    public float TurnRate = 1.0f;
+    public float CanonTurnRate = 1.0f; //Vitesse de rotation du canon
 
     [Header("Booleans")]
-    public bool RestrictTurretTurn = false; //Restreint la rotation du canon
     public bool RestrictMovement = false; //Restreint le mouvement du tank
-
+    public bool OnFire = false;
     //===================
+
 }

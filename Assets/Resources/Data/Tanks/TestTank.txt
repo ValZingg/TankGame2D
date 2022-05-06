@@ -1,0 +1,4 @@
+Class = Medium
+P = [Motor:TestMotor],[20,10,100,200]
+P = [Canon:TestCanon],[40,50,200,10]
+P = [Hull:TestHull],[0,0,200,200]

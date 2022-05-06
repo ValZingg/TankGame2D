@@ -1,0 +1,8 @@
+name = TestMotor
+Requirement = Light;Medium
+MaxCondition = 50
+FlamRes = 2
+Speed = 10
+Acceleration = 1
+TurnRate = 4
+Fuel = 100
