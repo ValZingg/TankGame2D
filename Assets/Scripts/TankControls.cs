@@ -16,28 +16,31 @@ public class TankControls : MonoBehaviour
     public float cameraspeed;
     public float smoothing = 0.001f;
 
-    [Header("Canon")]
-    public GameObject CenterPoint;
-    public GameObject PointingToPoint;
-    public GameObject Canon;
-    public float canonrotatespeed = 2.0f;
-
     [Header("Base Tank Values")]
     public string TankToLoad;
     public Tank TankScript;
-    public GameObject tankbody;
     public float tankspeed = 5.0f;
     public float currentspeed = 0f;
     public float acceleration = 0.1f;
     public float tankrotatespeed = 2.0f;
+    public float canonrotatespeed = 2.0f;
 
     [Header("Line renderer")]
     private LineRenderer Linerenderer_Aim;
     public LineRenderer Linerenderer_Canon;
 
+    [Header("GameObjects")]
+    public GameObject CenterPoint;
+    public GameObject PointingToPoint;
+    public GameObject CanonExitPoint;
+    public GameObject Canon;
+    public GameObject tankbody;
+
+    [Header("Prefabs")]
+    public GameObject ShellPrefab;
+
     //====================================
 
-    // Start is called before the first frame update
     void Start()
     {
         if (TankToLoad == "LightTank") TankScript = new LightTank();
@@ -53,7 +56,6 @@ public class TankControls : MonoBehaviour
         Linerenderer_Aim = GetComponent<LineRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         //MOUVEMENT DE LA CAMERA
@@ -78,18 +80,24 @@ public class TankControls : MonoBehaviour
         Linerenderer_Canon.SetPosition(0, Canon.transform.position);
         Linerenderer_Canon.SetPosition(1, PointingToPoint.transform.position);
 
+        //Contrôle du tir
+        if(Input.GetMouseButtonDown(0))
+        {
+            var CreatedShell = Instantiate(ShellPrefab); //On crée l'obus
 
-        //Tank movement
+            //On assigne la même position et rotation que le bout du canon
+            CreatedShell.transform.position = CanonExitPoint.transform.position;
+            CreatedShell.transform.rotation = CanonExitPoint.transform.rotation;
+
+            //On assigne les dégâts et statistiques
+            CreatedShell.GetComponent<ShellObject>().Damage = TankScript.DamagePerShell;
+            CreatedShell.GetComponent<ShellObject>().IsPlayerShell = true;
+        }
+
+
+        //Mouvement du tank
         if(!TankScript.RestrictMovement)
         {
-            /*
-            if (Input.GetKey(KeyCode.W)) transform.position += tankbody.transform.right * Time.deltaTime * tankspeed;
-            else if (Input.GetKey(KeyCode.S)) transform.position += -tankbody.transform.right * Time.deltaTime * tankspeed;
-
-            if (Input.GetKey(KeyCode.A)) tankbody.transform.Rotate(Vector3.forward * tankrotatespeed * Time.deltaTime);
-            else if (Input.GetKey(KeyCode.D)) tankbody.transform.Rotate(Vector3.back * tankrotatespeed * Time.deltaTime);*/
-
-
             //Si une des touches de mouvement est appuyée, on ajoute la rotation ou l'accéleration
             if (Input.GetKey(KeyCode.A)) tankbody.transform.Rotate(Vector3.forward * tankrotatespeed * Time.deltaTime);
             else if (Input.GetKey(KeyCode.D)) tankbody.transform.Rotate(Vector3.back * tankrotatespeed * Time.deltaTime);
