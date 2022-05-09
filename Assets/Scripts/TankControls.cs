@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
     Nom : TankControls.cs
@@ -25,6 +26,10 @@ public class TankControls : MonoBehaviour
     public float tankrotatespeed = 2.0f;
     public float canonrotatespeed = 2.0f;
 
+    [Header("Shooting")]
+    public float ShootCoolDown = 1.0f; //Temps de recharge entre chaque tir
+    public bool IsLoaded = true; //Est-ce qu'un obus est chargé ?
+
     [Header("Line renderer")]
     private LineRenderer Linerenderer_Aim;
     public LineRenderer Linerenderer_Canon;
@@ -38,19 +43,27 @@ public class TankControls : MonoBehaviour
 
     [Header("Prefabs")]
     public GameObject ShellPrefab;
+    public Texture2D CursorTexture;
+    public GameObject ExplosionEffect;
 
     //====================================
 
     void Start()
     {
+        //Ajuste le curseur
+        Cursor.SetCursor(CursorTexture, new Vector2(CursorTexture.width / 2, CursorTexture.height / 2), CursorMode.Auto);
+
+        //Charge le bon tank suivant le choix
         if (TankToLoad == "LightTank") TankScript = new LightTank();
         else if (TankToLoad == "MediumTank") TankScript = new MediumTank();
         else if (TankToLoad == "HeavyTank") TankScript = new HeavyTank();
 
+        //Récupère les données du dit tank
         canonrotatespeed = TankScript.CanonTurnRate;
         tankspeed = TankScript.Speed;
         tankrotatespeed = TankScript.TurnRate;
         acceleration = TankScript.Acceleration;
+        ShootCoolDown = TankScript.FiringRate;
 
 
         Linerenderer_Aim = GetComponent<LineRenderer>();
@@ -81,17 +94,27 @@ public class TankControls : MonoBehaviour
         Linerenderer_Canon.SetPosition(1, PointingToPoint.transform.position);
 
         //Contrôle du tir
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0)) //Si le joueur utilise le clic gauche de la souris
         {
-            var CreatedShell = Instantiate(ShellPrefab); //On crée l'obus
+            if(IsLoaded) //Si un obus est chargé
+            {
+                var CreatedShell = Instantiate(ShellPrefab); //On crée l'obus
 
-            //On assigne la même position et rotation que le bout du canon
-            CreatedShell.transform.position = CanonExitPoint.transform.position;
-            CreatedShell.transform.rotation = CanonExitPoint.transform.rotation;
+                //On assigne la même position et rotation que le bout du canon
+                CreatedShell.transform.position = CanonExitPoint.transform.position;
+                CreatedShell.transform.rotation = CanonExitPoint.transform.rotation;
 
-            //On assigne les dégâts et statistiques
-            CreatedShell.GetComponent<ShellObject>().Damage = TankScript.DamagePerShell;
-            CreatedShell.GetComponent<ShellObject>().IsPlayerShell = true;
+                //On assigne les dégâts et statistiques
+                CreatedShell.GetComponent<ShellObject>().Damage = TankScript.DamagePerShell;
+                CreatedShell.GetComponent<ShellObject>().IsPlayerShell = true;
+
+                //L'obus n'est plus chargé, vu qu'il a été tiré
+                IsLoaded = false;
+
+                //On débute le temps de recharge
+                StartCoroutine(Reload(ShootCoolDown));
+            }
+            //Si un obus n'est pas chargé, rien ne se passe.
         }
 
 
@@ -115,5 +138,19 @@ public class TankControls : MonoBehaviour
         }
 
     }
+    public void Explode() //Explosion du tank lorsqu'il est détruit
+    {
+        var explosion = Instantiate(ExplosionEffect); //On crée l'effet d'explosion
+        explosion.transform.position = transform.position;
+
+        TankScript.RestrictMovement = true; //On empêche tout mouvement
+    }
+
+    public IEnumerator Reload(float seconds) //Fonction chronométrant le temps de recharge depuis le dernier tir
+    {
+        yield return new WaitForSeconds(seconds); //Après x délai, l'obus sera à nouveau chargé et le joueur pourra tirer
+
+        IsLoaded = true;
+    }   
 
 }

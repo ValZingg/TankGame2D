@@ -174,6 +174,7 @@ MonoBehaviour:
   IsPlayerShell: 1
   Damage: 0
   LifeTime: 3
+  SmokeEffect: {fileID: 8167558391219960505, guid: 1230022c43b4c524b8b959cbc6ca1eda, type: 3}
 --- !u!61 &748043907242289356
 BoxCollider2D:
   m_ObjectHideFlags: 0
