@@ -148,11 +148,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103920142}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7114988, y: -0.07878508, z: 0.52256083}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2121400793}
-  m_RootOrder: 2
+  m_LocalPosition: {x: 0.0039216857, y: 0.016778804, z: 0}
+  m_LocalScale: {x: 0.38443318, y: 0.83831894, z: 1}
+  m_Children:
+  - {fileID: 2010317479}
+  m_Father: {fileID: 801147965}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &103920144
 SpriteRenderer:
@@ -394,7 +395,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2121400793}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &499010507
 GameObject:
@@ -637,7 +638,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.7217, y: -0.0988, z: 0.52256083}
   m_LocalScale: {x: 2.6012323, y: 1.1928635, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 103920143}
   m_Father: {fileID: 2121400793}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -897,15 +899,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072412895}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.723, y: -0.069, z: 0.52256083}
-  m_LocalScale: {x: 0.05098393, y: 0.5841158, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0.07878507, z: 0}
+  m_LocalScale: {x: 0.05098393, y: 0.65958357, z: 1}
   m_Children:
   - {fileID: 1611587811}
   - {fileID: 1242357678}
-  m_Father: {fileID: 2023727454}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_Father: {fileID: 1506383059}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1072412897
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -947,7 +949,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 594693ff6af68ae44800e7d5ef63aeda, type: 3}
-  m_Color: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
+  m_Color: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1083,7 +1085,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.7217, y: -0.0988, z: 0.52256083}
   m_LocalScale: {x: 2.6012323, y: 1.1928635, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1506383059}
   m_Father: {fileID: 2023727454}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1188,7 +1191,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242357677}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.2, y: 2.78, z: 0.4766538}
+  m_LocalPosition: {x: 0.2, y: 2.05, z: 0.4766538}
   m_LocalScale: {x: 2.082121, y: 19.61402, z: 1}
   m_Children: []
   m_Father: {fileID: 1072412896}
@@ -1219,11 +1222,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1506383058}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7114988, y: -0.07878508, z: 0.52256083}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2023727454}
-  m_RootOrder: 2
+  m_LocalPosition: {x: 0.042941187, y: 0.016778892, z: 0}
+  m_LocalScale: {x: 0.38443318, y: 0.83831894, z: 1}
+  m_Children:
+  - {fileID: 1072412896}
+  m_Father: {fileID: 1186006214}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1506383060
 SpriteRenderer:
@@ -1266,7 +1270,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.8018868, g: 0.6694998, b: 0.6694998, a: 1}
+  m_Color: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1330,11 +1334,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893012071}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.708, y: -0.22, z: -0.078327656}
+  m_LocalPosition: {x: -0.702, y: -0.12, z: -0.078327656}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2023727454}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1954312153
 GameObject:
@@ -1391,14 +1395,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010317478}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.723, y: -0.069, z: 0.52256083}
-  m_LocalScale: {x: 0.05098393, y: 0.5841158, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -0.011501192, y: 0.009785175, z: 0}
+  m_LocalScale: {x: 0.050983936, y: 0.65958345, z: 1}
   m_Children:
   - {fileID: 1954312154}
   - {fileID: 202713227}
-  m_Father: {fileID: 2121400793}
-  m_RootOrder: 1
+  m_Father: {fileID: 103920143}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!120 &2010317480
 LineRenderer:
@@ -1580,8 +1584,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1186006214}
-  - {fileID: 1072412896}
-  - {fileID: 1506383059}
   - {fileID: 1893012072}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -1614,7 +1616,8 @@ MonoBehaviour:
   PointingToPoint: {fileID: 1611587810}
   CanonExitPoint: {fileID: 1242357677}
   Canon: {fileID: 1072412895}
-  tankbody: {fileID: 1186006213}
+  TankBody: {fileID: 1186006213}
+  TankTurret: {fileID: 1506383058}
   ShellPrefab: {fileID: 1170173852970866209, guid: cc6a497f134dc924b9e35b2f9eb042a8, type: 3}
   CursorTexture: {fileID: 2800000, guid: ae69879fa5ea66748aed150384003348, type: 3}
   ExplosionEffect: {fileID: 8080259213418169025, guid: fb515eb83eada0c4aa981e28bfb9ccbb, type: 3}
@@ -1887,8 +1890,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 801147965}
-  - {fileID: 2010317479}
-  - {fileID: 103920143}
   - {fileID: 458281435}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -1913,10 +1914,11 @@ MonoBehaviour:
   canonrotatespeed: 2
   ShootCoolDown: 1
   IsLoaded: 1
-  CenterPoint: {fileID: 0}
-  PointingToPoint: {fileID: 0}
-  CanonExitPoint: {fileID: 0}
-  Canon: {fileID: 0}
-  tankbody: {fileID: 0}
+  CenterPoint: {fileID: 458281434}
+  PointingToPoint: {fileID: 1954312153}
+  CanonExitPoint: {fileID: 202713226}
+  Canon: {fileID: 2010317478}
+  TankBody: {fileID: 801147964}
+  TankTurret: {fileID: 103920142}
   ShellPrefab: {fileID: 0}
   ExplosionEffect: {fileID: 8080259213418169025, guid: fb515eb83eada0c4aa981e28bfb9ccbb, type: 3}

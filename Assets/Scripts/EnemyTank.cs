@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 /*
     Nom : TankControls.cs
-    Description : Script servant à contrôler le tank, et tourner + Tirer
+    Description : Script pour les tanks ennemis. Controlant l'IA
      */
 
 public class EnemyTank : MonoBehaviour
@@ -31,7 +31,8 @@ public class EnemyTank : MonoBehaviour
     public GameObject PointingToPoint;
     public GameObject CanonExitPoint;
     public GameObject Canon;
-    public GameObject tankbody;
+    public GameObject TankBody;
+    public GameObject TankTurret;
 
     [Header("Prefabs")]
     public GameObject ShellPrefab;
@@ -45,6 +46,20 @@ public class EnemyTank : MonoBehaviour
         if (TankToLoad == "LightTank") TankScript = new LightTank();
         else if (TankToLoad == "MediumTank") TankScript = new MediumTank();
         else if (TankToLoad == "HeavyTank") TankScript = new HeavyTank();
+
+        //Charge les graphismes du tank
+        TankBody.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("TankTex/" + TankToLoad + "/Hull"); //Texture du corps du tank
+        TankBody.transform.localScale = new Vector3(1.5f, 1.5f, 1f); //Ajustement de la taille
+
+        TankTurret.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("TankTex/" + TankToLoad + "/Turret"); //Texture de la tourelle du tank
+        TankTurret.transform.localScale = new Vector3(0.7f, 0.7f, 1f);//Ajustement de la taille
+        TankTurret.transform.position += new Vector3(0.25f, 0f, 0);//et de la position
+
+        Canon.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("TankTex/" + TankToLoad + "/Canon");
+        Canon.transform.localScale = new Vector3(1f, 1f, 1f);
+        Canon.transform.position = TankTurret.transform.position;
+
+        MatchSpriteToColliderSize();
 
         //Récupère les données du dit tank
         canonrotatespeed = TankScript.CanonTurnRate;
@@ -73,6 +88,13 @@ public class EnemyTank : MonoBehaviour
         yield return new WaitForSeconds(seconds); //Après x délai, l'obus sera à nouveau chargé et le joueur pourra tirer
 
         IsLoaded = true;
-    }   
+    }
+
+    public void MatchSpriteToColliderSize() //Fonction ajustant la taille d'un collider pour correspondre au sprite visible
+    { /* Source : https://forum.unity.com/threads/changing-boxcollider2d-size-to-match-sprite-bounds-at-runtime.267964/ */
+
+        Vector2 S = TankBody.GetComponent<SpriteRenderer>().sprite.bounds.size;
+        TankBody.GetComponent<BoxCollider2D>().size = S;
+    }
 
 }

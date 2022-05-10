@@ -1,5 +1,0 @@
-name = TestCanon
-Requirement = Light;Medium;Heavy
-Condition = 50
-FlamRes = 100
-ReloadRate = 2

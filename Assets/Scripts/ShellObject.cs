@@ -53,6 +53,7 @@ public class ShellObject : MonoBehaviour
                     if (collision.gameObject.GetComponent<EnemyTank>().TankScript.Health <= 0)
                     {
                         collision.gameObject.GetComponent<EnemyTank>().Explode(); //On joue l'animation d'explosion
+                        Destroy(collision.gameObject); //On supprime le tank ennemi détruit
                     }
                 }
                 
