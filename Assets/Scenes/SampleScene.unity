@@ -391,7 +391,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 458281434}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.708, y: -0.22, z: -0.078327656}
+  m_LocalPosition: {x: 0, y: 0, z: -0.078327656}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2121400793}
@@ -636,7 +636,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 801147964}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7217, y: -0.0988, z: 0.52256083}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.6012323, y: 1.1928635, z: 1}
   m_Children:
   - {fileID: 103920143}
@@ -1886,7 +1886,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2121400790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.63, y: 2.81, z: -0.52256083}
+  m_LocalPosition: {x: -6.24, y: 2.81, z: -0.52256083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 801147965}
@@ -1914,6 +1914,9 @@ MonoBehaviour:
   canonrotatespeed: 2
   ShootCoolDown: 1
   IsLoaded: 1
+  CurrentMode: Patrol
+  CurrentWayPoint: {fileID: 0}
+  SightRange: {fileID: 0}
   CenterPoint: {fileID: 458281434}
   PointingToPoint: {fileID: 1954312153}
   CanonExitPoint: {fileID: 202713226}
