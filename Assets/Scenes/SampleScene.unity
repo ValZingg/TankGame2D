@@ -635,8 +635,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 801147964}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.1411192, y: 0.8560789, z: 0}
   m_LocalScale: {x: 2.6012323, y: 1.1928635, z: 1}
   m_Children:
   - {fileID: 103920143}
@@ -1370,6 +1370,36 @@ Transform:
   m_Father: {fileID: 2010317479}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1977694767
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1977694768}
+  m_Layer: 0
+  m_Name: WayPointTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1977694768
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977694767}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -35.3, y: 19.4, z: -4.4001536}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2010317478
 GameObject:
   m_ObjectHideFlags: 0
@@ -1886,7 +1916,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2121400790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.24, y: 2.81, z: -0.52256083}
+  m_LocalPosition: {x: -10.9, y: 3.7, z: -0.52256083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 801147965}
@@ -1915,7 +1945,7 @@ MonoBehaviour:
   ShootCoolDown: 1
   IsLoaded: 1
   CurrentMode: Patrol
-  CurrentWayPoint: {fileID: 0}
+  CurrentWayPoint: {fileID: 1977694767}
   SightRange: {fileID: 0}
   CenterPoint: {fileID: 458281434}
   PointingToPoint: {fileID: 1954312153}

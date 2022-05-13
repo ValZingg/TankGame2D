@@ -79,16 +79,18 @@ public class EnemyTank : MonoBehaviour
     {
         if(CurrentWayPoint != null)
         {
-            Vector3 dirFromAtoB = (CurrentWayPoint.transform.position - TankBody.transform.TransformDirection(TankBody.transform.position)).normalized;
-            float dotProd = Vector3.Dot(dirFromAtoB, TankBody.transform.TransformDirection(TankBody.transform.forward));
+            Vector3 dirFromAtoB = (CurrentWayPoint.transform.position - TankBody.transform.position).normalized;
+            float dotProd = Vector3.Dot(dirFromAtoB, TankBody.transform.right);
 
-            if (dotProd > 0.9)
-            {
-                ControlTank("accelerate");
-            }
-            else ControlTank("turnright");
+            float distance = Vector3.Distance(CurrentWayPoint.transform.position, TankBody.transform.position);
 
-            Debug.Log(dotProd);
+            if (dotProd < 0.9) ControlTank("turnleft");
+
+            if (distance > 40) ControlTank("aimforspeed", tankspeed);
+            else if (distance > 10 && distance < 40) ControlTank("aimforspeed", tankspeed / 2);
+            else if (distance <= 10) ControlTank("stop");
+
+            Debug.Log("DOTPROD = " + dotProd + " / DIST = " + distance);
         }
 
         //MOUVEMENT DU TANK
@@ -100,10 +102,19 @@ public class EnemyTank : MonoBehaviour
         if (currentspeed < -tankspeed) currentspeed = -tankspeed;
     }
 
-    public void ControlTank(string order) //Contrôle le tank suivant l'ordre (ex : accélérer, décélerer, tourner...)
+    public void ControlTank(string order, float aimedspeed = 10) //Contrôle le tank suivant l'ordre (ex : accélérer, décélerer, tourner...)
     {
         if(order == "accelerate") currentspeed += acceleration * Time.deltaTime;
-        if(order == "slowdown") currentspeed -= acceleration * Time.deltaTime;
+        if(order == "aimforspeed")
+        {
+            if(currentspeed > aimedspeed) currentspeed -= acceleration * Time.deltaTime;
+            else currentspeed += acceleration * Time.deltaTime;
+        }
+        if(order == "reverse") currentspeed -= acceleration * Time.deltaTime;
+        if(order == "stop")
+        {
+            if(currentspeed > 0) currentspeed -= acceleration * Time.deltaTime * 2;
+        }
         if(order == "turnright") TankBody.transform.Rotate(Vector3.back * tankrotatespeed * Time.deltaTime);
         if(order == "turnleft") TankBody.transform.Rotate(Vector3.forward * tankrotatespeed * Time.deltaTime);
     }
