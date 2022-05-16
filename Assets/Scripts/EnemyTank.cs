@@ -27,8 +27,10 @@ public class EnemyTank : MonoBehaviour
 
     [Header("Intelligence Artificielle")]
     public string CurrentMode = "Patrol"; //Comportement actual, ex : "Patrouille, poursuite"
-    public GameObject CurrentWayPoint; //Point dans laquelle le tank est en train de se diriger
-    public CircleCollider2D SightRange; //Distance où le tank peut voir 
+    public Vector3 CurrentWayPoint; //Point dans laquelle le tank est en train de se diriger
+    public GameObject Target; //Cible que le canon doit viser
+    public bool InRangeToShoot = false; //Bonne distance pour tirer ?
+    public float DistanceToTarget = 0f; //Distance jusqu'a la cible
 
 
     [Header("GameObjects")]
@@ -77,20 +79,46 @@ public class EnemyTank : MonoBehaviour
 
     void Update()
     {
-        if(CurrentWayPoint != null)
+        //On calcule la distance jusqu'a la cible, si il y en a une.
+        if (Target != null) DistanceToTarget = Vector3.Distance(transform.position, Target.transform.position);
+
+        if(CurrentMode == "Pursuit") //Si le tank est en mode "poursuite"
         {
-            Vector3 dirFromAtoB = (CurrentWayPoint.transform.position - TankBody.transform.position).normalized;
+            CurrentWayPoint = Target.transform.position; //On met à jour la destination chaque frame
+        }
+
+        if(CurrentWayPoint != null) //Tant que le tank a un point de destination
+        {
+            //On soustrais la position de la destination et celle du tank, puis on normalise
+            Vector3 dirFromAtoB = (CurrentWayPoint - TankBody.transform.position).normalized;
+            //On trouve le produit scalaire du résultat, et ceci nous permettra de savoir si le tank fait face à sa destination
             float dotProd = Vector3.Dot(dirFromAtoB, TankBody.transform.right);
 
-            float distance = Vector3.Distance(CurrentWayPoint.transform.position, TankBody.transform.position);
+            //On calcule aussi la distance qu'il reste entre le tank et sa destination
+            float distance = Vector3.Distance(CurrentWayPoint, TankBody.transform.position);
 
-            if (dotProd < 0.9) ControlTank("turnleft");
+            if (dotProd < 0.9 && distance > 3) //Tant que le tank n'est pas totalement aligné à sa destination, et pas trop proche de celle-ci
+            {
+                ControlTank("turnleft"); //Il tourne
+            }
 
-            if (distance > 40) ControlTank("aimforspeed", tankspeed);
-            else if (distance > 10 && distance < 40) ControlTank("aimforspeed", tankspeed / 2);
-            else if (distance <= 10) ControlTank("stop");
+            if (distance >= 40) ControlTank("aimforspeed", tankspeed); //Si la distance est d'au moins 40, le tank accélère
+            else if (distance > 10 && distance < 40) ControlTank("aimforspeed", tankspeed / 2); //Si il est entre 10 et 40 de distance, il va avancer à la moitié de sa vitesse maximum
+            else if (distance <= 10) ControlTank("stop"); //Arrivé à 10 ou moins de distance, le tank va ralentir pour s'arrêter
 
             Debug.Log("DOTPROD = " + dotProd + " / DIST = " + distance);
+        }
+
+        if(Target != null && InRangeToShoot) //Si le tank a une cible
+        {
+            //ROTATION DU CANON
+            var pos = gameObject.transform.position;
+            var dir = Target.transform.position - pos;
+            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
+            Canon.transform.rotation = Quaternion.Slerp(Canon.transform.rotation, rotation, canonrotatespeed * Time.deltaTime / 2);
+
+
         }
 
         //MOUVEMENT DU TANK
@@ -141,4 +169,33 @@ public class EnemyTank : MonoBehaviour
         TankBody.GetComponent<BoxCollider2D>().size = S;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)//Quand un tank entre dans le champ de vision de ce tank
+    {
+        if (collision.gameObject.tag == "PlayerTank") //Si ce tank est celui du joueur
+        {
+            StopAllCoroutines(); //Si le timer de recherche était lancé, on l'arrête
+
+            Target = collision.gameObject; //On vise le joueur
+            InRangeToShoot = true; //Assez proche pour tirer
+            CurrentMode = "Shoot"; //Entre en mode "Tir"
+            CurrentWayPoint = collision.transform.position; //On se dirige vers lui
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)//Quand un tank sort du champ de vision de ce tank
+    {
+        if (collision.gameObject.tag == "PlayerTank") //Si ce tank est celui du joueur
+        {
+            InRangeToShoot = false; //Plus assez proche pour tirer
+            CurrentMode = "Pursuit"; //Entre en mode "poursuite"
+            StartCoroutine(SearchTimer()); //On commence le timer de recherche
+        }
+    }
+
+    public IEnumerator SearchTimer()
+    {
+        yield return new WaitForSeconds(30f); //On attend 30 secondes
+        Target = null; //Le tank du joueur sème ce tank
+        CurrentMode = "Patrol"; //On retourne en patrouille
+    }
 }

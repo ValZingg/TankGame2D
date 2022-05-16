@@ -100,7 +100,7 @@ public class TankControls : MonoBehaviour
         var dir = Input.mousePosition - pos;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
-        Canon.transform.rotation = Quaternion.Slerp(Canon.transform.rotation, rotation, canonrotatespeed * Time.deltaTime * 2);
+        Canon.transform.rotation = Quaternion.Slerp(Canon.transform.rotation, rotation, canonrotatespeed * Time.deltaTime);
 
         //LIGNE DE VISÈE
         Linerenderer_Aim.SetPosition(0, Canon.transform.position);
@@ -174,5 +174,6 @@ public class TankControls : MonoBehaviour
         Vector2 S = TankBody.GetComponent<SpriteRenderer>().sprite.bounds.size;
         TankBody.GetComponent<BoxCollider2D>().size = S;
     }
+
 
 }
