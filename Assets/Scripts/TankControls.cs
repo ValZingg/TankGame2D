@@ -31,7 +31,6 @@ public class TankControls : MonoBehaviour
     public bool IsLoaded = true; //Est-ce qu'un obus est chargé ?
 
     [Header("Line renderer")]
-    private LineRenderer Linerenderer_Aim;
     public LineRenderer Linerenderer_Canon;
 
     [Header("GameObjects")]
@@ -61,14 +60,14 @@ public class TankControls : MonoBehaviour
 
         //Charge les graphismes du tank
         TankBody.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("TankTex/" + TankToLoad + "/Hull"); //Texture du corps du tank
-        TankBody.transform.localScale = new Vector3(1.5f, 1.5f, 1f); //Ajustement de la taille
+        TankBody.transform.localScale = new Vector3(1.5f * TankScript.SizeModifier, 1.5f * TankScript.SizeModifier, 1f * TankScript.SizeModifier); //Ajustement de la taille
 
         TankTurret.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("TankTex/" + TankToLoad + "/Turret"); //Texture de la tourelle du tank
-        TankTurret.transform.localScale = new Vector3(0.7f, 0.7f, 1f);//Ajustement de la taille
-        TankTurret.transform.position += new Vector3(0.25f, 0f, 0);//et de la position
+        TankTurret.transform.localScale = new Vector3(0.7f * TankScript.SizeModifier, 0.7f * TankScript.SizeModifier, 1f * TankScript.SizeModifier);//Ajustement de la taille
+        TankTurret.transform.position += new Vector3(0.25f * TankScript.SizeModifier, 0f, 0);//et de la position
 
         Canon.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("TankTex/" + TankToLoad + "/Canon");
-        Canon.transform.localScale = new Vector3(1f, 1f, 1f);
+        Canon.transform.localScale = new Vector3(1f * TankScript.SizeModifier, 1f * TankScript.SizeModifier, 1f * TankScript.SizeModifier);
         Canon.transform.position = TankTurret.transform.position;
 
         MatchSpriteToColliderSize(); //On ajuste la position du collider
@@ -79,9 +78,6 @@ public class TankControls : MonoBehaviour
         tankrotatespeed = TankScript.TurnRate;
         acceleration = TankScript.Acceleration;
         ShootCoolDown = TankScript.FiringRate;
-
-
-        Linerenderer_Aim = GetComponent<LineRenderer>();
     }
 
     void Update()
@@ -103,8 +99,6 @@ public class TankControls : MonoBehaviour
         Canon.transform.rotation = Quaternion.Slerp(Canon.transform.rotation, rotation, canonrotatespeed * Time.deltaTime);
 
         //LIGNE DE VISéE
-        Linerenderer_Aim.SetPosition(0, Canon.transform.position);
-        Linerenderer_Aim.SetPosition(1, MainCamera.ScreenToWorldPoint(Input.mousePosition));
         Linerenderer_Canon.SetPosition(0, Canon.transform.position);
         Linerenderer_Canon.SetPosition(1, PointingToPoint.transform.position);
 

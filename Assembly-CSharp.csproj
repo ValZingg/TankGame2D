@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\EnemyTank.cs" />
     <Compile Include="Assets\Scripts\MediumTank.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenuButtonHover.cs" />
+    <Compile Include="Assets\Scripts\UIManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

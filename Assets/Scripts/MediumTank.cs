@@ -11,7 +11,7 @@ public class MediumTank : Tank
         Health = MaxHealth;
 
         //Les dégâts et tirs
-        FiringRate = 1.10f;
+        FiringRate = 1.35f;
         DamagePerShell = 25f;
 
         //La vitesse
@@ -19,5 +19,8 @@ public class MediumTank : Tank
         Acceleration = 2f;
         TurnRate = 30f;
         CanonTurnRate = 1.8f;
+
+        //La taille
+        SizeModifier = 1.2f;
     }
 }

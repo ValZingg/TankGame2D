@@ -20,5 +20,8 @@ public class LightTank : Tank
         Acceleration = 3f;
         TurnRate = 40f;
         CanonTurnRate = 2.7f;
+
+        //La taille
+        SizeModifier = 1.0f;
     }
 }

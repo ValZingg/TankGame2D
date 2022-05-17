@@ -56,14 +56,14 @@ public class EnemyTank : MonoBehaviour
 
         //Charge les graphismes du tank
         TankBody.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("TankTex/" + TankToLoad + "/Hull"); //Texture du corps du tank
-        TankBody.transform.localScale = new Vector3(1.5f, 1.5f, 1f); //Ajustement de la taille
+        TankBody.transform.localScale = new Vector3(1.5f * TankScript.SizeModifier, 1.5f * TankScript.SizeModifier, 1f * TankScript.SizeModifier); //Ajustement de la taille
 
         TankTurret.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("TankTex/" + TankToLoad + "/Turret"); //Texture de la tourelle du tank
-        TankTurret.transform.localScale = new Vector3(0.7f, 0.7f, 1f);//Ajustement de la taille
-        TankTurret.transform.position += new Vector3(0.25f, 0f, 0);//et de la position
+        TankTurret.transform.localScale = new Vector3(0.7f * TankScript.SizeModifier, 0.7f * TankScript.SizeModifier, 1f * TankScript.SizeModifier);//Ajustement de la taille
+        TankTurret.transform.position += new Vector3(0.25f * TankScript.SizeModifier, 0f, 0);//et de la position
 
         Canon.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("TankTex/" + TankToLoad + "/Canon");
-        Canon.transform.localScale = new Vector3(1f, 1f, 1f);
+        Canon.transform.localScale = new Vector3(1f * TankScript.SizeModifier, 1f * TankScript.SizeModifier, 1f * TankScript.SizeModifier);
         Canon.transform.position = TankTurret.transform.position;
 
         MatchSpriteToColliderSize();

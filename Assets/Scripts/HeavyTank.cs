@@ -11,13 +11,16 @@ public class HeavyTank : Tank
         Health = MaxHealth;
 
         //Les dégâts et tirs
-        FiringRate = 1.60f;
+        FiringRate = 1.70f;
         DamagePerShell = 40f;
 
         //La vitesse
         Speed = 6f;
         Acceleration = 1f;
-        TurnRate = 10f;
-        CanonTurnRate = 0.7f;
+        TurnRate = 15f;
+        CanonTurnRate = 1f;
+
+        //La taille
+        SizeModifier = 1.5f;
     }
 }

@@ -26,6 +26,8 @@ public class Tank
     public float TurnRate = 1.0f;
     public float CanonTurnRate = 1.0f; //Vitesse de rotation du canon
 
+    public float SizeModifier = 1.0f; //Modificateur de taille du tank. ex : 1.2 = 20% plus grand, 0.9 = 10% plus petit
+
     [Header("Booleans")]
     public bool RestrictMovement = false; //Restreint le mouvement du tank
     public bool OnFire = false;
