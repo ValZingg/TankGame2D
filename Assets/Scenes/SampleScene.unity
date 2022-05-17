@@ -580,7 +580,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.059843
+  orthographic size: 12.852761
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -604,7 +604,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -19.4, y: -7.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1552,7 +1552,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1977694767}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.6, y: -14.4, z: -4.4001536}
+  m_LocalPosition: {x: -20.6, y: -6.7, z: -4.4001536}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1768,7 +1768,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2023727453}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.74149877, y: -0.08121492, z: -0.52256083}
+  m_LocalPosition: {x: -18.6585, y: -7.681215, z: -0.52256083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1186006214}
@@ -2106,13 +2106,15 @@ MonoBehaviour:
   CurrentMode: Patrol
   CurrentWayPoint: {x: -20.6, y: -14.4, z: -4.400154}
   Target: {fileID: 0}
+  InRangeToShoot: 0
+  DistanceToTarget: 0
   CenterPoint: {fileID: 458281434}
   PointingToPoint: {fileID: 1954312153}
   CanonExitPoint: {fileID: 202713226}
   Canon: {fileID: 2010317478}
   TankBody: {fileID: 801147964}
   TankTurret: {fileID: 103920142}
-  ShellPrefab: {fileID: 0}
+  ShellPrefab: {fileID: 1170173852970866209, guid: cc6a497f134dc924b9e35b2f9eb042a8, type: 3}
   ExplosionEffect: {fileID: 8080259213418169025, guid: fb515eb83eada0c4aa981e28bfb9ccbb, type: 3}
 --- !u!58 &2121400795
 CircleCollider2D:

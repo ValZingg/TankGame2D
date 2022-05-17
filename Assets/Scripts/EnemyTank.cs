@@ -82,6 +82,13 @@ public class EnemyTank : MonoBehaviour
         //On calcule la distance jusqu'a la cible, si il y en a une.
         if (Target != null) DistanceToTarget = Vector3.Distance(transform.position, Target.transform.position);
 
+        if(DistanceToTarget > 40f && CurrentMode == "Pursuit") //Si le tank du joueur s'éloigne trop
+        {
+            CurrentWayPoint = Target.transform.position;// On met une dernière fois à jour la position du joueur, pour que le tank se déplace vers la dernière position connue
+            CurrentMode = "Search"; //Le tank passe en mode "recherche"
+            StartCoroutine(SearchTimer()); //On commence le timer de recherche
+        }
+
         if(CurrentMode == "Pursuit") //Si le tank est en mode "poursuite"
         {
             CurrentWayPoint = Target.transform.position; //On met à jour la destination chaque frame
@@ -118,7 +125,27 @@ public class EnemyTank : MonoBehaviour
             Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
             Canon.transform.rotation = Quaternion.Slerp(Canon.transform.rotation, rotation, canonrotatespeed * Time.deltaTime / 2);
 
+            if(CurrentMode == "Shoot")
+            {
+                if (IsLoaded) //Si un obus est chargé
+                {
+                    var CreatedShell = Instantiate(ShellPrefab); //On crée l'obus
 
+                    //On assigne la même position et rotation que le bout du canon
+                    CreatedShell.transform.position = CanonExitPoint.transform.position;
+                    CreatedShell.transform.rotation = CanonExitPoint.transform.rotation;
+
+                    //On assigne les dégâts et statistiques
+                    CreatedShell.GetComponent<ShellObject>().Damage = TankScript.DamagePerShell;
+                    CreatedShell.GetComponent<ShellObject>().IsPlayerShell = false;
+
+                    //L'obus n'est plus chargé, vu qu'il a été tiré
+                    IsLoaded = false;
+
+                    //On débute le temps de recharge
+                    StartCoroutine(Reload(ShootCoolDown));
+                }
+            }
         }
 
         //MOUVEMENT DU TANK
@@ -188,7 +215,6 @@ public class EnemyTank : MonoBehaviour
         {
             InRangeToShoot = false; //Plus assez proche pour tirer
             CurrentMode = "Pursuit"; //Entre en mode "poursuite"
-            StartCoroutine(SearchTimer()); //On commence le timer de recherche
         }
     }
 
