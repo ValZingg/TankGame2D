@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
 
     public Image DamageOverlay; //Fait rougir l'écran quand le joueur reçois un obus
 
+    public Text TimeLimitText; //Texte indiquant le temps restant
+
     [Header("Parameters")]
     public float DamageOverlayDecayRate = 0.05f; //La vitesse à laquelle l'écran passe de rouge à normal
 
@@ -41,7 +43,7 @@ public class UIManager : MonoBehaviour
         TargetY = GameObject.Find("TargetY").GetComponent<Image>();
         TargetText = GameObject.Find("TargetText").GetComponent<Text>();
 
-        if(!EnableTarget)
+        if(!EnableTarget) //Si l'option est désactivée, on n'affiche pas la cible
         {
             TargetX.enabled = false;
             TargetY.enabled = false;
@@ -50,6 +52,8 @@ public class UIManager : MonoBehaviour
 
         DamageOverlay = GameObject.Find("DamageOverlay").GetComponent<Image>();
         DamageOverlay.color = new Color(80, 0, 0, 0); //Rend trensparent
+
+        TimeLimitText = GameObject.Find("TimeLimitText").GetComponent<Text>();
 
     }
 
@@ -77,6 +81,9 @@ public class UIManager : MonoBehaviour
 
         if(DamageOverlay.color.a > 0) DamageOverlay.color = new Color(80, 0, 0, DamageOverlay.color.a - DamageOverlayDecayRate); //Si le calque rouge n'est pas transparent, il le deviens petit à petit
         Debug.Log("Current Alpha : " + DamageOverlay.color.a);
+
+        //Affiche le temps restant
+        TimeLimitText.text = GameObject.Find("CampaignManager").GetComponent<Campaign>().TimeLimit.ToString("0:00");
     }
 
     public void ActivateRedOverlay() //Active le calque rouge sur l'écran, puis le fait disparaitre petit à petit

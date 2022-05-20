@@ -131,11 +131,11 @@ public class TankControls : MonoBehaviour
         if(!TankScript.RestrictMovement)
         {
             //Si une des touches de mouvement est appuyée, on ajoute la rotation ou l'accéleration
-            if (Input.GetKey(KeyCode.A)) TankBody.transform.Rotate(Vector3.forward * tankrotatespeed * Time.deltaTime);
-            else if (Input.GetKey(KeyCode.D)) TankBody.transform.Rotate(Vector3.back * tankrotatespeed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) TankBody.transform.Rotate(Vector3.forward * tankrotatespeed * Time.deltaTime);
+            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) TankBody.transform.Rotate(Vector3.back * tankrotatespeed * Time.deltaTime);
 
-            if (Input.GetKey(KeyCode.W)) currentspeed += acceleration * Time.deltaTime;
-            else if(Input.GetKey(KeyCode.S)) currentspeed -= acceleration * Time.deltaTime;
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) currentspeed += acceleration * Time.deltaTime;
+            else if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) currentspeed -= acceleration * Time.deltaTime;
          
 
             //Bouge le tank
