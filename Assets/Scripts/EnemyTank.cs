@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 /*
     Nom : TankControls.cs
-    Description : Script pour les tanks ennemis. Controlant l'IA
+    Description : Script pour les tanks ennemis. Quasi-Identique au script du tank du joueur, avec comme seule différence que celui-ci contrôle l'IA du tank.
      */
 
 public class EnemyTank : MonoBehaviour

@@ -34,12 +34,12 @@ public class TankControls : MonoBehaviour
     public LineRenderer Linerenderer_Canon;
 
     [Header("GameObjects")]
-    public GameObject CenterPoint;
-    public GameObject PointingToPoint;
-    public GameObject CanonExitPoint;
-    public GameObject Canon;
-    public GameObject TankBody;
-    public GameObject TankTurret;
+    public GameObject CenterPoint; //Point central du tank  
+    public GameObject PointingToPoint; //Le point où pointe le canon du tank    
+    public GameObject CanonExitPoint; //Le bout du canon du tank, là ou va apparaître les obus
+    public GameObject Canon; //Le canon
+    public GameObject TankBody; //Le "corps" du tank
+    public GameObject TankTurret; //La tourelle du tank
 
     [Header("Prefabs")]
     public GameObject ShellPrefab;

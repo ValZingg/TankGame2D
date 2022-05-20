@@ -19,6 +19,11 @@ public class UIManager : MonoBehaviour
     public Image TargetX, TargetY;
     public Text TargetText;
 
+    public Image DamageOverlay; //Fait rougir l'écran quand le joueur reçois un obus
+
+    [Header("Parameters")]
+    public float DamageOverlayDecayRate = 0.05f; //La vitesse à laquelle l'écran passe de rouge à normal
+
     [Header("External")]
     public TankControls PlayerTankScript; //Script de tank du joueur
 
@@ -42,6 +47,10 @@ public class UIManager : MonoBehaviour
             TargetY.enabled = false;
             TargetText.enabled = false;
         }
+
+        DamageOverlay = GameObject.Find("DamageOverlay").GetComponent<Image>();
+        DamageOverlay.color = new Color(80, 0, 0, 0); //Rend trensparent
+
     }
 
 
@@ -65,5 +74,13 @@ public class UIManager : MonoBehaviour
             if (!PlayerTankScript.IsLoaded) TargetText.text = TargetText.text + "\nRECHARGE...";
             else TargetText.text = TargetText.text + "\nCANON PRÊT";
         }
+
+        if(DamageOverlay.color.a > 0) DamageOverlay.color = new Color(80, 0, 0, DamageOverlay.color.a - DamageOverlayDecayRate); //Si le calque rouge n'est pas transparent, il le deviens petit à petit
+        Debug.Log("Current Alpha : " + DamageOverlay.color.a);
+    }
+
+    public void ActivateRedOverlay() //Active le calque rouge sur l'écran, puis le fait disparaitre petit à petit
+    {
+        DamageOverlay.color = new Color(80, 0, 0, 0.7f);
     }
 }

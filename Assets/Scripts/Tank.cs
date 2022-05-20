@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
     Nom : Tank.cs
-    Description : Script servant à garder toutes les données et variable d'un tank. (munitions, vie,etc )
+    Description : Script servant à garder toutes les données et variable d'un tank. (vitesse, vie,etc )
      
      */
 

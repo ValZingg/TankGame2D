@@ -55,14 +55,16 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\DestroyAfterXSeconds.cs" />
     <Compile Include="Assets\Scripts\LightTank.cs" />
+    <Compile Include="Assets\Scripts\Wall.cs" />
     <Compile Include="Assets\Scripts\TankControls.cs" />
     <Compile Include="Assets\Scripts\ShellObject.cs" />
+    <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\HeavyTank.cs" />
     <Compile Include="Assets\Scripts\Tank.cs" />
     <Compile Include="Assets\Scripts\EnemyTank.cs" />
     <Compile Include="Assets\Scripts\MediumTank.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenuButtonHover.cs" />
-    <Compile Include="Assets\Scripts\UIManager.cs" />
+    <Compile Include="Assets\Scripts\MainMenu\MainMenuManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

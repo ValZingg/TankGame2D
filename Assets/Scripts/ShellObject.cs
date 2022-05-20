@@ -49,7 +49,6 @@ public class ShellObject : MonoBehaviour
                 if(collision.gameObject.GetComponent<EnemyTank>().TankScript.Health > 0) //Si il possède toujours un peu de vie
                 {
                     collision.gameObject.GetComponent<EnemyTank>().TankScript.Health -= Damage; //On inflige les dégâts
-                    Debug.Log("Life remaining : " + collision.gameObject.GetComponent<EnemyTank>().TankScript.Health);
                     if (collision.gameObject.GetComponent<EnemyTank>().TankScript.Health <= 0)
                     {
                         collision.gameObject.GetComponent<EnemyTank>().Explode(); //On joue l'animation d'explosion
@@ -66,7 +65,7 @@ public class ShellObject : MonoBehaviour
                 if (collision.gameObject.GetComponent<TankControls>().TankScript.Health > 0) //Si il possède toujours un peu de vie
                 {
                     collision.gameObject.GetComponent<TankControls>().TankScript.Health -= Damage; //On inflige les dégâts
-                    Debug.Log("Life remaining : " + collision.gameObject.GetComponent<TankControls>().TankScript.Health);
+                    GameObject.Find("Canvas").GetComponent<UIManager>().ActivateRedOverlay(); //On active le calque rouge sur l'écran
                     if (collision.gameObject.GetComponent<TankControls>().TankScript.Health <= 0)
                     {
                         collision.gameObject.GetComponent<TankControls>().Explode(); //On joue l'animation d'explosion

@@ -22,7 +22,7 @@ public class MainMenuButtonHover : MonoBehaviour, IPointerEnterHandler, IPointer
     //Lorsque la souris en sors
     public void OnPointerExit(PointerEventData eventData)
     {
-        GetComponent<Text>().fontSize = 60;
+        GetComponent<Text>().fontSize = 70;
         GetComponent<Text>().color = Color.white;
     }
 }
