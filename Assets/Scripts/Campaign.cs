@@ -12,7 +12,8 @@ public class Campaign : MonoBehaviour
     //========================
     public string CampaignName;
     public Objective CampaignObjective;
-    public float TimeLimit;
+    public float TimeLimit; //Temps limite (en seconde)
+    public int TanksDestroyed = 0; //Nombre de tanks détruits par le joueur
     //========================
 
     private void Start()
@@ -20,6 +21,7 @@ public class Campaign : MonoBehaviour
         CampaignName = GameObject.Find("DataTracker").GetComponent<DataTracker>().Objective_Save.ObjectiveName; //On récupère le nom de l'objectif
         CampaignObjective = GameObject.Find("DataTracker").GetComponent<DataTracker>().Objective_Save; //On récupère l'objectif dans DataTracker
         string campaigntype = CampaignObjective.GetType().Name; //On récupère le type d'objectif
+        Debug.Log(CampaignObjective.GetType().Name);
 
         if(campaigntype == "Assassinate") //Si l'objectif est de type "assassinate"
         {
@@ -61,5 +63,14 @@ public class Campaign : MonoBehaviour
         }
         uimanager.EndScreenBG.SetActive(true);
 
+    }
+
+    public void AddTankDestruction() //appelé quand un tank ennemi est détruit. Cette fonction va vérifier si le type de mission et "destroy" et si oui, comparer le score avec l'objectif.
+    {
+        TanksDestroyed++;
+        if(CampaignObjective.GetType().Name == "Destroy") //Si la campagne est de type "destroy"
+        {
+            if (TanksDestroyed == ((Destroy)CampaignObjective).Amount) CampaignObjective.Completed = true; //On complète l'objectif si le nombre de tanks à détruire est atteint.
+        }
     }
 }

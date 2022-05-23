@@ -24,15 +24,13 @@ public class DataTracker : MonoBehaviour
     {/* Quand le joueur clique sur la mission "assassinate" au menu principal*/
         Assassinate TempObj = new Assassinate("Assassiner"); //On crée l'objectif, et on le stocke dans DataTracker
         Objective_Save = TempObj;
-        Objective_Save.Completed = false;
         SceneManager.LoadScene("TestLevel"); //On charge le niveau
     }
 
     public void DestroyClick()
     {/* Quand le joueur clique sur la mission "Destroy" au menu principal*/
-        Assassinate TempObj = new Assassinate("Destroy"); //On crée l'objectif, et on le stocke dans DataTracker
+        Destroy TempObj = new Destroy("Destroy"); //On crée l'objectif, et on le stocke dans DataTracker
         Objective_Save = TempObj;
-        Objective_Save.Completed = false;
         SceneManager.LoadScene("TestLevel"); //On charge le niveau
     }
 }

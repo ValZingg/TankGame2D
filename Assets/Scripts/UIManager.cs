@@ -27,6 +27,8 @@ public class UIManager : MonoBehaviour
     public Text EndScreenText; //Le texte qui affichera "Victoire" ou "Défaite"
     public GameObject EndScreenBG; //La fenêtre de fin de partie
 
+    public Text ObjectiveText; //Texte indiquant l'objectif à accomplir
+
     [Header("Parameters")]
     public float DamageOverlayDecayRate = 0.05f; //La vitesse à laquelle l'écran passe de rouge à normal
 
@@ -62,6 +64,12 @@ public class UIManager : MonoBehaviour
         EndScreenBG = GameObject.Find("EndScreenBG");
         EndScreenText = GameObject.Find("EndScreenTitle").GetComponent<Text>();
         EndScreenBG.SetActive(false); //On cache l'écran de fin
+
+        ObjectiveText = GameObject.Find("ObjectiveText").GetComponent<Text>();
+        //on inscrit l'objectif actuel suivant
+        Campaign tempcamp = GameObject.Find("CampaignManager").GetComponent<Campaign>();
+        if (tempcamp.CampaignObjective.GetType().Name == "Assassinate") ObjectiveText.text = "Objectif : Assassiner la cible rouge brillante.";
+        else if (tempcamp.CampaignObjective.GetType().Name == "Destroy") ObjectiveText.text = "Objectif : Détruisez " + ((Destroy)tempcamp.CampaignObjective).Amount + " tanks ennemis.";
 
     }
 
@@ -100,6 +108,7 @@ public class UIManager : MonoBehaviour
 
     public void ReturnToMenuButtonClick() //Quand le joueur clique sur le bouton "Retour au menu"
     {
+        Destroy(GameObject.Find("DataTracker")); //On supprime le DataTracker
         SceneManager.LoadScene(0); //On retourne au menu principal
     }
 }
