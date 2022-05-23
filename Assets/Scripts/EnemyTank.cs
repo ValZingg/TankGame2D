@@ -40,6 +40,7 @@ public class EnemyTank : MonoBehaviour
     public GameObject Canon;
     public GameObject TankBody;
     public GameObject TankTurret;
+    public GameObject AssassinateLight; //Lumière indiquant que le tank est la cible d'une mission "Assassinat"
 
     [Header("Prefabs")]
     public GameObject ShellPrefab;
@@ -47,7 +48,7 @@ public class EnemyTank : MonoBehaviour
 
     //====================================
 
-    void Start()
+    void Awake()
     {
         //Charge le bon tank suivant le choix
         if (TankToLoad == "LightTank") TankScript = new LightTank();
@@ -74,6 +75,10 @@ public class EnemyTank : MonoBehaviour
         tankrotatespeed = TankScript.TurnRate;
         acceleration = TankScript.Acceleration;
         ShootCoolDown = TankScript.FiringRate;
+
+        //Lumière d'assassinat
+        AssassinateLight = transform.GetChild(2).gameObject;
+        AssassinateLight.SetActive(false); //éteint la lumière
 
     }
 
@@ -112,8 +117,6 @@ public class EnemyTank : MonoBehaviour
             if (distance >= 40) ControlTank("aimforspeed", tankspeed); //Si la distance est d'au moins 40, le tank accélère
             else if (distance > 10 && distance < 40) ControlTank("aimforspeed", tankspeed / 2); //Si il est entre 10 et 40 de distance, il va avancer à la moitié de sa vitesse maximum
             else if (distance <= 10) ControlTank("stop"); //Arrivé à 10 ou moins de distance, le tank va ralentir pour s'arrêter
-
-            Debug.Log("DOTPROD = " + dotProd + " / DIST = " + distance);
         }
 
         if(Target != null && InRangeToShoot) //Si le tank a une cible

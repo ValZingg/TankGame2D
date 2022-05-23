@@ -12,9 +12,8 @@ public class Assassinate : Objective
     public GameObject Target; // Cible à détruire
     //==================
 
-    public Assassinate(string objectivename, GameObject target) : base(objectivename)
+    public Assassinate(string objectivename) : base(objectivename)
     {
         ObjectiveName = objectivename;
-        Target = target;
     }
 }

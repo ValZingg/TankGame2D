@@ -52,6 +52,10 @@ public class ShellObject : MonoBehaviour
                     if (collision.gameObject.GetComponent<EnemyTank>().TankScript.Health <= 0)
                     {
                         collision.gameObject.GetComponent<EnemyTank>().Explode(); //On joue l'animation d'explosion
+
+                        if (collision.gameObject.GetComponent<EnemyTank>().AssassinateLight.activeSelf) //Si le tank a la lumière d'assassinat activé, alors on déduit que la mission actuelle est une mission d'assassinat, et que la cible vient de mourir.
+                            GameObject.Find("CampaignManager").GetComponent<Campaign>().CampaignObjective.CompleteObjective(); //On accompli donc l'objectif.
+
                         Destroy(collision.gameObject); //On supprime le tank ennemi détruit
                     }
                 }
@@ -69,6 +73,7 @@ public class ShellObject : MonoBehaviour
                     if (collision.gameObject.GetComponent<TankControls>().TankScript.Health <= 0)
                     {
                         collision.gameObject.GetComponent<TankControls>().Explode(); //On joue l'animation d'explosion
+                        GameObject.Find("CampaignManager").GetComponent<Campaign>().EndCampaign(false); //On montre l'écran de défaite
                         Destroy(collision.gameObject); //On supprime le tank du joueur
 
                         //TODO : GAME OVER

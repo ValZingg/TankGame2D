@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 /*
@@ -17,5 +18,21 @@ public class DataTracker : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject); //Signale à Unity que l'objet ne doit PAS être détruit quand le changement de niveau aura lieu.
+    }
+
+    public void AssassinateClick()
+    {/* Quand le joueur clique sur la mission "assassinate" au menu principal*/
+        Assassinate TempObj = new Assassinate("Assassiner"); //On crée l'objectif, et on le stocke dans DataTracker
+        Objective_Save = TempObj;
+        Objective_Save.Completed = false;
+        SceneManager.LoadScene("TestLevel"); //On charge le niveau
+    }
+
+    public void DestroyClick()
+    {/* Quand le joueur clique sur la mission "Destroy" au menu principal*/
+        Assassinate TempObj = new Assassinate("Destroy"); //On crée l'objectif, et on le stocke dans DataTracker
+        Objective_Save = TempObj;
+        Objective_Save.Completed = false;
+        SceneManager.LoadScene("TestLevel"); //On charge le niveau
     }
 }

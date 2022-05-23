@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /*
     Nom : UIManager.cs
@@ -22,6 +23,9 @@ public class UIManager : MonoBehaviour
     public Image DamageOverlay; //Fait rougir l'écran quand le joueur reçois un obus
 
     public Text TimeLimitText; //Texte indiquant le temps restant
+
+    public Text EndScreenText; //Le texte qui affichera "Victoire" ou "Défaite"
+    public GameObject EndScreenBG; //La fenêtre de fin de partie
 
     [Header("Parameters")]
     public float DamageOverlayDecayRate = 0.05f; //La vitesse à laquelle l'écran passe de rouge à normal
@@ -55,6 +59,10 @@ public class UIManager : MonoBehaviour
 
         TimeLimitText = GameObject.Find("TimeLimitText").GetComponent<Text>();
 
+        EndScreenBG = GameObject.Find("EndScreenBG");
+        EndScreenText = GameObject.Find("EndScreenTitle").GetComponent<Text>();
+        EndScreenBG.SetActive(false); //On cache l'écran de fin
+
     }
 
 
@@ -80,7 +88,6 @@ public class UIManager : MonoBehaviour
         }
 
         if(DamageOverlay.color.a > 0) DamageOverlay.color = new Color(80, 0, 0, DamageOverlay.color.a - DamageOverlayDecayRate); //Si le calque rouge n'est pas transparent, il le deviens petit à petit
-        Debug.Log("Current Alpha : " + DamageOverlay.color.a);
 
         //Affiche le temps restant
         TimeLimitText.text = GameObject.Find("CampaignManager").GetComponent<Campaign>().TimeLimit.ToString("0:00");
@@ -89,5 +96,10 @@ public class UIManager : MonoBehaviour
     public void ActivateRedOverlay() //Active le calque rouge sur l'écran, puis le fait disparaitre petit à petit
     {
         DamageOverlay.color = new Color(80, 0, 0, 0.7f);
+    }
+
+    public void ReturnToMenuButtonClick() //Quand le joueur clique sur le bouton "Retour au menu"
+    {
+        SceneManager.LoadScene(0); //On retourne au menu principal
     }
 }
