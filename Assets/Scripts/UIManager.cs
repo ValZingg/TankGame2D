@@ -41,6 +41,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        //On récupère les paramètres de la barre de vie
         HealthText = GameObject.Find("HealthText").GetComponent<Text>();
         HealthBar = GameObject.Find("HealthBar").GetComponent<Image>();
         HealthBarEmpty = GameObject.Find("HealthBarEmpty").GetComponent<Image>();
@@ -56,11 +57,12 @@ public class UIManager : MonoBehaviour
             TargetText.enabled = false;
         }
 
-        DamageOverlay = GameObject.Find("DamageOverlay").GetComponent<Image>();
+        DamageOverlay = GameObject.Find("DamageOverlay").GetComponent<Image>(); //Calque rouge pour indiquer les dégâts
         DamageOverlay.color = new Color(80, 0, 0, 0); //Rend trensparent
 
-        TimeLimitText = GameObject.Find("TimeLimitText").GetComponent<Text>();
+        TimeLimitText = GameObject.Find("TimeLimitText").GetComponent<Text>(); //Texte indiquant le chronomètre
 
+        //Ecran de fin de partie
         EndScreenBG = GameObject.Find("EndScreenBG");
         EndScreenText = GameObject.Find("EndScreenTitle").GetComponent<Text>();
         EndScreenBG.SetActive(false); //On cache l'écran de fin

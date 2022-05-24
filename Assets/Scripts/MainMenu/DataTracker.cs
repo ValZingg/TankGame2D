@@ -13,6 +13,7 @@ public class DataTracker : MonoBehaviour
 {
     //===============================
     public Objective Objective_Save;
+    public string Tank_Save = "LightTank"; //Quel type de tank le joueur doit-il charger
     //===============================
 
     private void Start()
@@ -33,4 +34,10 @@ public class DataTracker : MonoBehaviour
         Objective_Save = TempObj;
         SceneManager.LoadScene("TestLevel"); //On charge le niveau
     }
+
+    //Ces trois fonctions sont appelées lorsque le joueur clique sur un des boutons de choix de tank
+    public void SelectLightTank() => Tank_Save = "LightTank";
+    public void SelectMediumTank() => Tank_Save = "MediumTank";
+    public void SelectHeavyTank() => Tank_Save = "HeavyTank";
+
 }

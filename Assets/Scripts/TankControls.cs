@@ -50,6 +50,9 @@ public class TankControls : MonoBehaviour
 
     void Start()
     {
+        //Récupère le tank à charger depuis le datatracker
+        TankToLoad = GameObject.Find("DataTracker").GetComponent<DataTracker>().Tank_Save;
+
         //Ajuste le curseur
         Cursor.SetCursor(CursorTexture, new Vector2(CursorTexture.width / 2, CursorTexture.height / 2), CursorMode.Auto);
 
