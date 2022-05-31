@@ -15,16 +15,16 @@ public class TankControls : MonoBehaviour
     [Header("Camera")]
     public Camera MainCamera;
     public float cameraspeed;
-    public float smoothing = 0.001f;
+    public float Smoothing = 0.001f;
 
     [Header("Base Tank Values")]
     public string TankToLoad;
     public Tank TankScript;
-    public float tankspeed = 5.0f;
-    public float currentspeed = 0f;
-    public float acceleration = 0.1f;
-    public float tankrotatespeed = 2.0f;
-    public float canonrotatespeed = 2.0f;
+    public float TankSpeed = 5.0f;
+    public float CurrentSpeed = 0f;
+    public float Acceleration = 0.1f;
+    public float TankRotateSpeed = 2.0f;
+    public float CanonRotateSpeed = 2.0f;
 
     [Header("Shooting")]
     public float ShootCoolDown = 1.0f; //Temps de recharge entre chaque tir
@@ -76,10 +76,10 @@ public class TankControls : MonoBehaviour
         MatchSpriteToColliderSize(); //On ajuste la position du collider
 
         //Récupère les données du dit tank
-        canonrotatespeed = TankScript.CanonTurnRate;
-        tankspeed = TankScript.Speed;
-        tankrotatespeed = TankScript.TurnRate;
-        acceleration = TankScript.Acceleration;
+        CanonRotateSpeed = TankScript.CanonTurnRate;
+        TankSpeed = TankScript.Speed;
+        TankRotateSpeed = TankScript.TurnRate;
+        Acceleration = TankScript.Acceleration;
         ShootCoolDown = TankScript.FiringRate;
     }
 
@@ -90,7 +90,7 @@ public class TankControls : MonoBehaviour
         if(screenrect.Contains(Input.mousePosition))
         {
             var relativemousepos = CenterPoint.transform.position + (Input.mousePosition - new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
-            MainCamera.transform.position = Vector2.Lerp(CenterPoint.transform.position, relativemousepos, smoothing);
+            MainCamera.transform.position = Vector2.Lerp(CenterPoint.transform.position, relativemousepos, Smoothing);
             MainCamera.transform.position = new Vector3(MainCamera.transform.position.x, MainCamera.transform.position.y, -10);
         }
 
@@ -99,7 +99,7 @@ public class TankControls : MonoBehaviour
         var dir = Input.mousePosition - pos;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
-        Canon.transform.rotation = Quaternion.Slerp(Canon.transform.rotation, rotation, canonrotatespeed * Time.deltaTime);
+        Canon.transform.rotation = Quaternion.Slerp(Canon.transform.rotation, rotation, CanonRotateSpeed * Time.deltaTime);
 
         //LIGNE DE VISéE
         Linerenderer_Canon.SetPosition(0, Canon.transform.position);
@@ -134,19 +134,19 @@ public class TankControls : MonoBehaviour
         if(!TankScript.RestrictMovement)
         {
             //Si une des touches de mouvement est appuyée, on ajoute la rotation ou l'accéleration
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) TankBody.transform.Rotate(Vector3.forward * tankrotatespeed * Time.deltaTime);
-            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) TankBody.transform.Rotate(Vector3.back * tankrotatespeed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) TankBody.transform.Rotate(Vector3.forward * TankRotateSpeed * Time.deltaTime);
+            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) TankBody.transform.Rotate(Vector3.back * TankRotateSpeed * Time.deltaTime);
 
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) currentspeed += acceleration * Time.deltaTime;
-            else if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) currentspeed -= acceleration * Time.deltaTime;
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) CurrentSpeed += Acceleration * Time.deltaTime;
+            else if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) CurrentSpeed -= Acceleration * Time.deltaTime;
          
 
             //Bouge le tank
-            if (currentspeed != 0) transform.position += TankBody.transform.right * Time.deltaTime * currentspeed;
+            if (CurrentSpeed != 0) transform.position += TankBody.transform.right * Time.deltaTime * CurrentSpeed;
 
             //Corrige les erreurs de vitesse
-            if(currentspeed > tankspeed)currentspeed = tankspeed;
-            if (currentspeed < -tankspeed) currentspeed = -tankspeed;
+            if(CurrentSpeed > TankSpeed)CurrentSpeed = TankSpeed;
+            if (CurrentSpeed < -TankSpeed) CurrentSpeed = -TankSpeed;
         }
 
     }
